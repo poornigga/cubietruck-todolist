@@ -10,5 +10,22 @@ download the [cubietruck lubuntu](http://dl.cubieboard.org/software/a20-cubietru
 4. update your repo, `sudo apt-get update`
 
 ## Wifi AP Config
-1. get `hostapd`, `sudo apt-get install -y hostapd`
-2. edit config file `/etc/hostapd/hostapd.conf`
++ get `hostapd`, `sudo apt-get install -y hostapd`
++ edit config file `/etc/hostapd/hostapd.conf`
+
+like this
+
+    interface=wlan0
+    driver=nl80211
+    ssid=cubietruck
+    channel=11
+    hw_mode=g
+    macaddr_acl=0
+    auth_algs=1
+    ignore_broadcast_ssid=0
+
++ edit `/etc/modules`, change `bcmdhd` to `bcmdhd op_code=2`
++ reboot
++ startup hostapd, `sudo hostapd /etc/hostapd/hostapd.conf`
+
+Now, you have a working AP!
